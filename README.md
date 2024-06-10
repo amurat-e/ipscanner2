@@ -5,6 +5,8 @@ Written by EA & AME 2015 - 2024
 App Types: python
 
 ## Features
+| Module                    | Feature
+| ------                    | -------
 |sources/ipscan2.py         | Main application
 |sources/gui_main.py        | Grafik User Interface
 |sources/pyicmp/__init__.py | pyicmp package definer
@@ -12,6 +14,9 @@ App Types: python
 |sources/pyicmp/ip.py       | IP header string unpacker
 |sources/pyicmp/messages.py | ICMP messages handler
 |sources/pyicmp/ping.py     | Ping module
+
+| Module                    | Feature
+| ------                    | -------
 |config/ipscan2.cfg         | Intialized paramaters file
 ||IP1=155.223.128.1
 ||IP2=155.223.128.32
