@@ -20,7 +20,7 @@ App Types: python
 |config/ipscan2.cfg      | Intialized paramaters file
 |IP1=www.xxx.yyy.zzz     | First ip (v4) in subnet  
 |IP2=www.xxx.yyy.zzz     | Second ip (v4) in subnet 
-|TTL=64 # Time To Live   | The amount of time or “hops” that a packet is set to exist inside a network before being discarded by a router
+|TTL=64                  | The amount of time or “hops” that a packet is set to exist inside a network before being discarded by a router
 |CONSOLE=                | Replacce "#" ICMP info to output to console
 |DUMP=/file_path-        | Create ip dumpfile (.csv)
 ## Usage/Examples  
