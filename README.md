@@ -15,11 +15,18 @@ App Types: python
 |sources/pyicmp/messages.py | ICMP messages handler
 |sources/pyicmp/ping.py     | Ping module
 
-| Module                    | Feature
-| ------                    | -------
-|config/ipscan2.cfg         | Intialized paramaters file
-||IP1=155.223.128.1
-||IP2=155.223.128.32
-||TTL=64 # Time To Live
-||CONSOLE=
-||DUMP=/Users/alimuratergin/Desktop/ipscan- # create ip dumpfile (.csv)
+| Config file            | Feature
+| -----------            | -------
+|config/ipscan2.cfg      | Intialized paramaters file
+|IP1=www.xxx.yyy.zzz     | First ip (v4) in subnet  
+|IP2=www.xxx.yyy.zzz     | Second ip (v4) in subnet 
+|TTL=64 # Time To Live   | The amount of time or “hops” that a packet is set to exist inside a network before being discarded by a router
+|CONSOLE=                | Replacce "#" ICMP info to output to console
+|DUMP=/file_path-        | Create ip dumpfile (.csv)
+## Usage/Examples  
+~~~python3
+cd ../ipscanner2/sources  
+$ sudo python3 ipscan2.py
+
+ ~~~
+
