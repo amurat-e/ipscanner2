@@ -43,8 +43,10 @@ def genaddr_classless(ip1, ip2): # classless or explicit range
 
 def amiadmin(): # sending ICMP messages requires superuser privileges
     try:
+        # unix type superuser?
         is_admin = os.getuid() == 0
     except AttributeError:
+        # windows type superuser?
         is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
     return is_admin
 
@@ -64,8 +66,6 @@ def main():
     # superuser check
     try:
         if not amiadmin():
-            #pass 
-            
             raise PermissionError
         cfgd = readfromconffile()
         TK = tkinter.Tk()
