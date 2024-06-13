@@ -52,7 +52,8 @@ class Ping:
 		ins.bind(("", port))
 		ins.settimeout(timeout)
 		#set TTL for OUT socket
-		outs.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
+		# OSError: [WinError 10022] An invalid argument was supplied - Windows 10 Python
+		# outs.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
 		
 		#create packet and send it
 		#print('sending to', ip, 'packet with', identifier, sequence,'\n')

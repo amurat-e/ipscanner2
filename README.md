@@ -25,6 +25,8 @@ App Types: python
 |DUMP=/file_path-        | Create ip dumpfile (.csv)
 ## Usage/Examples  
 ~~~python3
+# sending ICMP messages, requires superuser privileges for unix and windows platforms
+# Requires to enable ICMP echos and python.exe send receive Firewall for windows platforms
 cd ../ipscanner2/sources  
 $ sudo python3 ipscan2.py
 
