@@ -3,12 +3,14 @@ Multithreaded IP scanner application which determines IPs dead or alive for give
 
 Written by EA & AME 2015 - 2024
 App Types: python
+Version: 2.2
 
 ## Features
 | Module                    | Feature
 | ------                    | -------
 |sources/ipscan2.py         | Main application
 |sources/gui_main.py        | Grafik User Interface
+|sources/console_main.py    | Console User Interface
 |sources/pyicmp/__init__.py | pyicmp package definer
 |sources/pyicmp/handler.py  | IP ping handler
 |sources/pyicmp/ip.py       | IP header string unpacker

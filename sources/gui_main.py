@@ -1,18 +1,11 @@
-﻿#!/usr/bin/env python3
-# requires superuser privileges
-# EA 2015 Ege University
-# Updated by AME 2022, 2024
-# readfromconffile() ipscan.cfg -> ipscan2.cfg
-
-from ipscan2 import *
+﻿from ipscan2 import *
 from concurrent.futures import *
 import threading
 import tkinter
 import tkinter.ttk
 import tkinter.scrolledtext
 import datetime
-
-
+# GUI 
 class IPScannerApp(tkinter.Frame):
     
     def __init__(self, master=None, handler=None, cfgd=None):
@@ -50,7 +43,7 @@ class IPScannerApp(tkinter.Frame):
         # reverse conversion from integers
         ip0 = inttoinet4(ip0)
         ip1 = inttoinet4(ip1)
-        print("Python IPScanner version 2.1")
+        print("Python IPScanner version 2.2 GUI")
         self.master.title("IP Scanner using ICMP")
         # window setup
         self.fname = tkinter.StringVar(self, self.filename)
@@ -94,7 +87,7 @@ class IPScannerApp(tkinter.Frame):
         ping_result = []
         # send promises to future executor
         with executor:
-            futs = [ executor.submit(IPScanner, self.handler, ip, ttl, self.dumpfile, self.fileiolock,self.console) for ip in ips_converted ]
+            futs = [ executor.submit(IPScanner, self.handler, ip, ttl, self.dumpfile, self.fileiolock,False) for ip in ips_converted ]
         # get results as completed
         for ex in concurrent.futures.as_completed(futs):
             ping_result = ex.result()

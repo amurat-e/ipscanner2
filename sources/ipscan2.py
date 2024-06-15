@@ -12,7 +12,8 @@ import threading, concurrent
 from concurrent import futures
 from concurrent.futures import *
 import gui_main, tkinter
-
+import console_main
+ 
 ThreadLimit = 64
 
 
@@ -48,10 +49,10 @@ def amiadmin(): # sending ICMP messages requires superuser privileges
     except AttributeError:
         # windows type superuser?
         is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
+        is_admin = True
     return is_admin
 
 def readfromconffile():
-    
     # config file values will also be defaults for GUI
     env_base = "../config"
     print('ipsscan2.cfg base: ',env_base)
@@ -68,46 +69,30 @@ def main():
         if not amiadmin():
             raise PermissionError
         cfgd = readfromconffile()
-        TK = tkinter.Tk()
-        gui_handle = gui_main.IPScannerApp(master=TK,handler=icmp(0),cfgd=cfgd)
-        TK.mainloop()
+        if ('CONSOLE' not in cfgd) :
+            TK = tkinter.Tk()
+            gui_handle = gui_main.IPScannerApp(master=TK,handler=icmp(0),cfgd=cfgd)
+            TK.mainloop()
+        else:
+           
+            console_handle = console_main.Console(handler=icmp(0),cfgd=cfgd)
+            console_handle.ip_scan()
+            
     except PermissionError as e:
-        print ("Needs administrator/root privilege for creating OS Socket.")
-        print ("sudo python3 "+sys.argv[0])
-        exit()
+            print ("Needs administrator/root privilege for creating OS Socket.")
+            print ("sudo python3 "+sys.argv[0])
+            exit()
 
 def IPScanner(handler, ip, ttl, file, lock, console):
-
     ping_result = handler.do_ping(ip, ttl)
-
     # Future function for actual IP scanning task
     # for simplicity, screen and file I/O uses the same lock here
     # Console print thread
-    if (console):
-        t = PrintThread(ping_result, lock)
-        t.start()
-
     if (file is not None):
         # Writing .csv file thread if DUMP is not None from ipscan2.cfg  file
         d = DumpFileThread(file, ping_result, lock)
         d.start()
     return ping_result
-
-class PrintThread(threading.Thread):
-# screen messages
-    def __init__(self, res, lock):
-        threading.Thread.__init__(self, name="screen")
-        self.res = res
-        self.lock = lock
-    
-    def run(self):
-        flag = False # try until successful, do at most once
-        while not flag: 
-            with self.lock:
-                stat = '\x1b[92mAlive\x1b[0m' if self.res['on'] else '\x1b[91mDead\x1b[0m'
-                respt = str(self.res['avg_time']/1000)+'ms' if self.res['on'] else ''
-                print(self.res['ip']+':('+str(self.res['hostname'])+') :'+respt +' -> '+ stat)
-                flag = True
 
 class DumpFileThread(threading.Thread):
 # this is responsible for outputting dump thread
