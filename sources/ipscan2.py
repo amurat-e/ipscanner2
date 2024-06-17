@@ -70,11 +70,12 @@ def main():
             raise PermissionError
         cfgd = readfromconffile()
         if ('CONSOLE' not in cfgd) :
+            print(sys.argv[0] + ' is running GUI mode. \nIf you prefer CONSOLE mode, remove the \'#\' at the beginning of the CONSOLE= line in the \'ipscan 2.cfg\' file.')
             TK = tkinter.Tk()
             gui_handle = gui_main.IPScannerApp(master=TK,handler=icmp(0),cfgd=cfgd)
             TK.mainloop()
         else:
-           
+            print(sys.argv[0] + ' is running CONSOLE mode. \nIf you prefer GUI mode, put \'#\' at the beginning of CONSOLE= line in \'ipscan2.cfg\' file.')
             console_handle = console_main.Console(handler=icmp(0),cfgd=cfgd)
             console_handle.ip_scan()
             

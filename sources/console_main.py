@@ -66,7 +66,7 @@ class Console():
         return ping_result
 
     def ip_scan(self):
-        print("If you won't to change IPs press ENTER")
+        print("If you won't to change IPs press ENTER.")
         in1 = input("Current IP1:{} New? ".format(self.cfgs['IP1'].replace('\n',''))) 
         in2 = input("Current IP2:{} New? ".format(self.cfgs['IP2'].replace('\n',''))) 
         ip_1 = self.cfgs['IP1'] if in1 == '' else in1
